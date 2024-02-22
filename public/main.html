@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ParseIt</title>
+</head>
+<body>
+  <form action="/submit" method="post" id="slotForm">
+    <div>
+      <label for="name">Name </label>
+      <input type="text" name="name" required>
+      <p class="seatsLeft"></p>
+    </div>
+    <br>
+    <div>
+      <label for="regno">Reg. Number </label>
+      <input type="text" name="regno" required>
+    </div>
+    <br>
+    <div>
+      <div>
+        <label for="slot1">Slot 1</label>
+        <input type="radio" name="grp1" id=1 value="1">
+        <p id="seatsLeft1"></p>
+      </div>
+      <div>
+        <label for="slot1">Slot 2</label>
+        <input type="radio" name="grp1" id=2 value="2">
+        <p id="seatsLeft2"></p>
+      </div>
+      <div>
+        <label for="slot1">Slot 3</label>
+        <input type="radio" name="grp1" id=3 value="3">
+        <p id="seatsLeft3"></p>
+      </div>
+      <div>
+        <label for="slot1">Slot 4</label>
+        <input type="radio" name="grp1" id=4 value="d1 9:00 - 9:50">
+        <p id="seatsLeft4"></p>
+      </div>
+      <div>
+        <label for="slot1">Slot 5</label>
+        <input type="radio" name="grp1" id=5 value="5">
+        <p id="seatsLeft5"></p>
+      </div>
+      <div>
+        <label for="slot1">Slot 6</label>
+        <input type="radio" name="grp1" id=6 value="6">
+        <p id="seatsLeft6"></p>
+      </div>
+    </div>
+    <div><button type="submit">Submit</button></div>
+  </form>
+  <p id="finall"></p>
+  <script>
+    // const arr = [25,25,25,25,25,25];
+    // for(i = 0;i<6;i++){
+    //   document.getElementById("seatsLeft"+String(i+1)).innerHTML = arr[i] + " seats Left";
+    // }
+    // document.getElementById("slotForm").addEventListener("submit", function(event) {
+    //   event.preventDefault(); 
+      
+      
+    //   var selectedSlot = document.querySelector('input[name="grp1"]:checked');
+    //   var selectedSlotId = selectedSlot.id;
+      // arr[selectedSlotId-1]--;
+      
+      
+
+      // if(arr[selectedSlotId-1] === 0 ){
+      //   document.getElementById("seatsLeft"+String(i+1)).innerHTML = "No seats Left";
+      // }
+      // if (!selectedSlot) {
+      //   alert("Please select a slot.");
+      // }
+    // });
+
+    // function submitForm(event){
+    //     event.preventDefault();
+    //     form.style.display = "none";
+    //     finall.innerHTML = "<b>Form Submitted Successfully</b>";
+    //   }
+
+    //   form.addEventListener('submit',submitForm);
+    
+    
+
+    </script>
+</body>
+</html>
