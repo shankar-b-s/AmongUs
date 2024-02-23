@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SlotSelector</title>
+
+</head>
+<body>
+  <form action="/submit" method="post" id="slotForm">
+    <div>
+      
+      <label for="name">Name </label>
+      <input type="text" name="name" >
+      <p class="seatsLeft"></p>
+    </div>
+    <br>
+    <div>
+      <label for="regno">Reg. Number </label>
+      <input type="text" name="regno" >
+    </div>
+    <br>
+    <div>
+      <div>DAY 1</div>
+      <div>
+        <div>Slot 1</div>
+        <div>9:00 - 10:00</div>
+        <%= s1d1 %>
+        <input type="radio" name="grp1" id=1 value="s1d1" >
+        <p id="seatsLeft1"></p>
+      </div>
+      <div>
+        <div>Slot 2</div>
+        <div>10:00 -11:00</div>
+        <%= s2d1 %>
+        <input type="radio" name="grp1" id=2 value="s2d1" >
+        <p id="seatsLeft2"></p>
+      </div>
+      <div>
+        <div>Slot 3</div>
+        <div>11:00 -12:00</div>
+        <%= s3d1 %>
+        <input type="radio" name="grp1" id=3 value="s3d1">
+        <p id="seatsLeft3"></p>
+      </div>
+      <div>
+        <div>Slot 4</div>
+        <div>1:00 -2:00</div>
+        <%= s4d1 %>
+        <input type="radio" name="grp1" id=4 value="s4d1">
+        <p id="seatsLeft4"></p>
+      </div>
+      <div>DAY 2</div>
+      <div>
+        <div>Slot 1</div>
+        <div>2:00 -3:00</div>
+        <%= s1d2 %>
+        <input type="radio" name="grp1" id=5 value="s1d2">
+        <p id="seatsLeft5"></p>
+      </div>
+      <div>
+        <div>Slot 2</div>
+        <div>3:00 -4:00</div>
+        <%= s2d2 %>
+        <input type="radio" name="grp1" id=6 value="s2d2">
+        <p id="seatsLeft6"></p>
+      </div>
+      <div>
+        <div>Slot 3</div>
+        <div>3:00 -4:00</div>
+        <%= s3d2 %>
+        <input type="radio" name="grp1" id=6 value="s3d2">
+        <p id="seatsLeft6"></p>
+      </div>
+      <div>
+        <div>Slot 4</div>
+        <div>3:00 -4:00</div>
+        <%= s4d2 %>
+        <input type="radio" name="grp1" id=6 value="s4d2">
+        <p id="seatsLeft6"></p>
+      </div>
+    </div>
+    <div><button type="submit">Submit</button></div>
+  </form>
+  <p id="finall"></p>
+  
+  
+</body>
+</html>
