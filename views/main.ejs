@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SlotSelector</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-black text-white">
+    <div id="stars">
+     <%- include("./logo.ejs") %>
+      <div class=" p-5">
+        <form action="/reg" method="post" id="slotForm">
+          <div class="flex flex-col items-center">
+            <div class="display flex flex-col gap-5">
+              <label for="name" class="text-3xl">Full Name </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="enter your full name"
+                class="w border-0 p-1 text-3xl border-b-4 text-[#F24555A1] placeholder:text-[#F24555A1] focus:outline-none bg-black border-[#F24555]"
+              />
+              <button type="submit" class="btn">Next</button>
+            </div>
+            
+          </div>
+         
+          </div>
+          
+        </form>
+       
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Number</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-black text-white">
+    <%- include("logo.ejs") %>
+    <form action="/instruction" method="post" id="slotForm">
+      <div>
+        <div class="flex flex-col gap-5">
+          <label for="regno" class="text-3xl">Registration Number </label>
+          <input
+            type="text"
+            name="regno"
+            placeholder="enter your registration number"
+            class="w border-0 p-1 text-3xl border-b-4 text-[#F24555A1] placeholder:text-[#F24555A1] focus:outline-none bg-black border-[#F24555]"
+          />
+        </div>
+      <div>
+        <button class="btn" type="submit">Next</button>
+      </div>
+    </form>
+  </body>
+</html>
