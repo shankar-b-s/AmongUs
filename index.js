@@ -67,8 +67,8 @@ app.get("/", (req, res) => {
   res.render(__dirname + "/views/main.ejs");
 });
 
-app.get("/admin/1007", (req, res) => {
-  res.render(res.render(__dirname + "/views/admin.ejs"));
+app.get("/admin/auth/1007", (req, res) => {
+  res.render(res.render(__dirname + "/views/adminAuth.ejs"));
 });
 app.get("/reg", (req, res) => {
   res.render(res.render(__dirname + "/views/reg.ejs"));
@@ -90,15 +90,26 @@ app.post("/reg", async (req, res) => {
     res.render(__dirname + "/views/reg.ejs");
   }
 });
-
+app.post("/admin/auth/1007", (req, res) => {
+  let password = req.body.password;
+  let myPass = "AmongMeand@ISTE";
+  console.log(myPass);
+  if (password == myPass) {
+    res.render(__dirname + "/views/admin.ejs");
+  } else {
+    res.redirect("/");
+  }
+});
 app.post("/admin/1007", (req, res) => {
   let newName = req.body.newname;
   let newReg = req.body.newreg;
-  maindata[newReg] = newName;
-  console.log("Sucess");
-  console.log(maindata);
-
-  res.redirect("/");
+  if (newName != undefined && newReg != undefined) {
+    maindata[newReg] = newName;
+    console.log(maindata);
+    res.send("sucess");
+  } else {
+    res.redirect("/");
+  }
 });
 app.post("/instruction", (req, res) => {
   var PRegNo = req.body.regno;
