@@ -8,128 +8,148 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-black text-white">
+     <% for(let i=0; i<170; i++) { %>
+    <div
+      class="star"
+      style="
+        top: <%= Math.random() * 100 %>vh;
+        left: <%= Math.random() * 100 %>vw;
+        animation-duration: <%= Math.random() * 5+1 %>s;
+      "
+    ></div>
+    <% } %>
     <div>
       <%- include("logo.ejs") %>
       <form action="./submit" method="post">
-       <div class="flex flex-wrap gap-16 ">
-         <div class="flex flex-col gap-2 card rounded-md px-3 py-2">
-                  <div class="text-5xl">Day 1</div>
-                  <div class="text-2xl">9:30-10:30</div>
-                  <div class="flex">
-                    <input
-                      type="radio"
-                      name="grp1"
-                      id="1"
-                      value="s1d1"
-                      class="mx-1"
-                    />
+       <div class="flex flex-wrap justify-center gap-12 mt-12">
+         <div class="flex flex-col gap-2 p-3 card backdrop-blur-md  rounded-md px-3 py-2"  onclick="selectSlot(1)">
+                  <div class="text-5xl">1st March</div>
+                  <div class="text-2xl ">9:30 a.m. - 10:30 a.m.</div>
+                  <div class="flex gap-2 justify-end ">
                     <div class="mx-1"><%= s1d1 %></div>
+                   <input type="radio" name="grp1" id="1" value="s1d1"class="mt-1 appearance-none h-4 w-4 border border-gray-300 rounded checked:bg-red-500 checked:border-transparent checked:outline-none text-red-600" />
+
                   </div>
                 </div>
-                <div class="flex flex-col gap-2 card rounded-md px-3 py-2">
-                  <div class="text-5xl">Day 1</div>
-                  <div class="text-2xl">10:45-11:45</div>
-                  <div class="flex">
+                <div class="flex flex-col gap-2 p-3 card backdrop-blur-md  rounded-md px-3 py-2"  onclick="selectSlot(2)">
+                  <div class="text-5xl">1st March</div>
+                  <div class="text-2xl">10:45 a.m. - 11:45 a.m.</div>
+                  <div class="flex gap-2 justify-end">
+                    <div class="mx-1"><%= s2d1 %></div>
                     <input
-                      class="mx-1"
+                      class="mt-1 appearance-none h-4 w-4 border border-gray-300 rounded checked:bg-red-500 checked:border-transparent checked:outline-none text-red-600" 
                       type="radio"
                       name="grp1"
                       id="2"
                       value="s2d1"
                     />
-                    <div class="mx-1"><%= s2d1 %></div>
+                    
                   </div>
                 </div>
-                <div class="flex flex-col gap-2 card rounded-md px-3 py-2">
-                  <div class="text-5xl">Day 1</div>
-                  <div class="text-2xl">1:15-2:15</div>
-                  <div class="flex">
+                <div class="flex flex-col gap-2 card backdrop-blur-md  rounded-md px-3 py-2"  onclick="selectSlot(3)">
+                  <div class="text-5xl">1st March</div>
+                  <div class="text-2xl">1:15 p.m. - 2:15 p.m.</div>
+                  <div class="flex gap-2 justify-end">
+                    <div class="mx-1"><%= s3d1 %></div>
                     <input
-                      class="mx-1"
+                      class="mt-1 appearance-none h-4 w-4 border border-gray-300 rounded checked:bg-red-500 checked:border-transparent checked:outline-none text-red-600" 
                       type="radio"
                       name="grp1"
                       id="3"
                       value="s3d1"
                     />
-                    <div class="mx-1"><%= s3d1 %></div>
+                    
                   </div>
                 </div>
-                <div class="flex flex-col gap-2 card rounded-md px-3 py-2">
-                  <div class="text-5xl">Day 1</div>
-                  <div class="text-3xl">2:30-3:30</div>
+                <div class="flex flex-col gap-2 card backdrop-blur-md  rounded-md px-3 py-2"  onclick="selectSlot(4)">
+                  <div class="text-5xl">1st March</div>
+                  <div class="text-2xl">2:30 p.m. - 3:30 p.m.</div>
 
-                  <div class="flex">
+                  <div class="flex justify-end gap-2">
+                    <div class="mx-1"><%= s4d1 %></div>
                     <input
-                      class="mx-1"
+                      class="mt-1 appearance-none h-4 w-4 border border-gray-300 rounded checked:bg-red-500 checked:border-transparent checked:outline-none text-red-600" 
                       type="radio"
                       name="grp1"
                       id="4"
                       value="s4d1"
                     />
-                    <div class="mx-1"><%= s3d1 %></div>
+                    
                   </div>
                 </div>           
                 
-                  <div class="card flex flex-col rounded-md px-3 py-2 gap-2">
-                    <div class="text-5xl">Day 2</div>
-                    <div class="text-3xl">9:30-10:30</div>
-                    <div class="flex">
+                  <div class="card backdrop-blur-md  flex flex-col rounded-md px-3 py-2 gap-2"  onclick="selectSlot(5)">
+                    <div class="text-5xl">2nd March</div>
+                    <div class="text-2xl">9:30 a.m. - 10:30 a.m.</div>
+                    <div class="flex justify-end gap-2">
+                      <div class="mx-1"><%= s1d2 %></div>
                       <input
-                        class="mx-1"
+                      class="mt-1 appearance-none h-4 w-4 border border-gray-300 rounded checked:bg-red-500 checked:border-transparent checked:outline-none text-red-600" 
                         type="radio"
                         name="grp1"
                         id="5"
                         value="s1d2"
                       />
-                      <div class="mx-1"><%= s1d2 %></div>
+                      
                     </div>
                   </div>
-                  <div class="card flex flex-col rounded-md px-3 py-2 gap-2">
-                    <div class="text-5xl">Day 2</div>
-                    <div class="text-3xl">10:45-11:45</div>
-                    <div class="flex">
+                  <div class="card backdrop-blur-md  flex flex-col rounded-md px-3 py-2 gap-2"  onclick="selectSlot(6)">
+                    <div class="text-5xl">2nd March</div>
+                    <div class="text-2xl">10:45 a.m. - 11:45 a.m.</div>
+                    <div class="flex justify-end gap-2">
+                      <div class="mx-1"><%= s2d2 %></div>
                       <input
-                        class="mx-1"
+                      class="mt-1 appearance-none h-4 w-4 border border-gray-300 rounded checked:bg-red-500 checked:border-transparent checked:outline-none text-red-600" 
                         type="radio"
                         name="grp1"
                         id="6"
                         value="s2d2"
                       />
-                      <div class="mx-1"><%= s1d2 %></div>
+                      
                     </div>
                   </div>
-                  <div class="card flex flex-col rounded-md px-3 py-2 gap-2">
-                    <div class="text-5xl">Day 2</div>
-                    <div class="text-3xl">1:15-2:15</div>
-                    <div class="flex">
+                  <div class="card backdrop-blur-md  flex flex-col rounded-md px-3 py-2 gap-2"  onclick="selectSlot(7)">
+                    <div class="text-5xl">2nd March</div>
+                    <div class="text-2xl">1:15 p.m. - 2:15 p.m.</div>
+                    <div class="flex justify-end gap-2">
+                      <div class="mx-1"><%= s3d2 %></div>
                       <input
-                        class="mx-1"
+                      class="mt-1 appearance-none h-4 w-4 border border-gray-300 rounded checked:bg-red-500 checked:border-transparent checked:outline-none text-red-600" 
                         type="radio"
                         name="grp1"
-                        id="6"
+                        id="7"
                         value="s3d2"
                       />
-                      <div class="mx-1"><%= s3d2 %></div>
+                      
                     </div>
                   </div>
-                  <div class="card flex flex-col rounded-md px-3 py-2 gap-2">
-                    <div class="text-5xl">Day 2</div>
-                    <div class="text-3xl">2:30-3:30</div>
-                    <div class="flex">
+                  <div class="card backdrop-blur-md  flex flex-col rounded-md px-3 py-2 gap-2"  onclick="selectSlot(8)">
+                    <div class="text-5xl">2nd March</div>
+                    <div class="text-2xl">2:30 p.m. - 3:30 p.m.</div>
+                    <div class="flex justify-end gap-2">
+                      <div class="mx-1"><%= s4d2 %></div>
                       <input
-                        class="mx-1"
+                      class="mt-1 appearance-none h-4 w-4 border border-gray-300 rounded checked:bg-red-500 checked:border-transparent checked:outline-none text-red-600" 
                         type="radio"
                         name="grp1"
-                        id="6"
+                        id="8"
                         value="s4d2"
                       />
-                      <div class="mx-1"><%= s4d2 %></div>
                     </div>
                   </div>
                 </div>
+                <div class="mt-8 flex justify-center"> <button class="button-54 rounded-xl  bg-[#F24645] shadow-[#942336]" type="submit"> <div class="text-white">Submit</div></button></div>
             </div>
-            <div> <button class="btn" type="submit">Submit</button></div>
-            </form>
+            
+           </form>
     </div>
+    <script>
+      function selectSlot(id){
+         var radioButton = document.getElementById(id);
+        
+    
+      radioButton.checked = true;
+      }
+    </script>
   </body>
 </html>

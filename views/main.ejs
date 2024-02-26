@@ -7,20 +7,30 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-black text-white">
+      <% for(let i=0; i<170; i++) { %>
+        <div class="star" style="top: <%= Math.random()*100 %>vh; left: <%= Math.random()*100 %>vw; animation-duration: <%= Math.random()*5+1 %>s;"></div>
+    <% } %>
+
+
     <div id="stars">
+      <div>
      <%- include("./logo.ejs") %>
-      <div class=" p-5">
-        <form action="/reg" method="post" id="slotForm">
+     </div> 
+     <div class=" p-5 flex flex-col items-center  justify-center gap-14 mt-auto">
+        <form class="mt-16" action="/reg" method="post" id="slotForm">
           <div class="flex flex-col items-center">
-            <div class="display flex flex-col gap-5">
-              <label for="name" class="text-3xl">Full Name </label>
+            <div class="display flex flex-col gap-6">
+              <label for="name" class="text-5xl">What is your <strong>Name</strong> </label>
+              <div class="text-2xl">( a.k.a the username your parents gave you )</div>
               <input
                 type="text"
                 name="name"
+                id="name"
                 placeholder="enter your full name"
+                autocomplete="off"
                 class="w border-0 p-1 text-3xl border-b-4 text-[#F24555A1] placeholder:text-[#F24555A1] focus:outline-none bg-black border-[#F24555]"
               />
-              <button type="submit" class="btn">Next</button>
+              <button type="submit" class="button-54 rounded-xl  bg-[#F24645] shadow-[#942336]"><div class="text-white">Next</div></button>
             </div>
             
           </div>
@@ -31,5 +41,11 @@
        
       </div>
     </div>
+    <script>
+  
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("name").focus();
+  });
+</script>
   </body>
 </html>

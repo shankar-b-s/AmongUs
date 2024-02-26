@@ -22,7 +22,7 @@ var data = {
   s4d2: 40,
 };
 
-const maindata = {
+let maindata = {
   "22BCE0375": "Khushi Sikaria",
   "22BCE0510": "Gagan N Bangaragiri",
   "22BCE0791": "Harsh Kumar Sinha",
@@ -67,6 +67,9 @@ app.get("/", (req, res) => {
   res.render(__dirname + "/views/main.ejs");
 });
 
+app.get("/admin/1007", (req, res) => {
+  res.render(res.render(__dirname + "/views/admin.ejs"));
+});
 app.get("/reg", (req, res) => {
   res.render(res.render(__dirname + "/views/reg.ejs"));
 });
@@ -88,6 +91,15 @@ app.post("/reg", async (req, res) => {
   }
 });
 
+app.post("/admin/1007", (req, res) => {
+  let newName = req.body.newname;
+  let newReg = req.body.newreg;
+  maindata[newReg] = newName;
+  console.log("Sucess");
+  console.log(maindata);
+
+  res.redirect("/");
+});
 app.post("/instruction", (req, res) => {
   var PRegNo = req.body.regno;
   console.log(PRegNo);
@@ -102,15 +114,19 @@ app.post("/slots", (req, res) => {
   res.render(__dirname + "/views/slots.ejs", data);
 });
 
+var msg = "";
+
+app.post("/err", (req, res) => {
+  res.redirect("/");
+});
 app.post("/submit", (req, res) => {
   console.log(req.body);
   console.log("This is a " + a);
-  var PNameN = a[0];
-  var PRegNoN = a[1];
+  var PNameN = a[a.length - 2];
+  var PRegNoN = a[a.length - 1];
   var Pslot = req.body.grp1;
   if (Pslot == undefined || Pslot == "") {
-    res.send(`<script>alert("Select Your Slot ");</>`);
-    res.redirect("/");
+    res.redirect("/slots");
   }
   PNameN = PNameN.toUpperCase();
   PRegNoN = PRegNoN.toUpperCase();
@@ -124,7 +140,7 @@ app.post("/submit", (req, res) => {
   console.log(CheckData(maindata, obj.RegNo, obj.Name));
 
   if (CheckData(maindata, obj.RegNo, obj.Name)) {
-    var sqlq = "SELECT * FROM responses WHERE RegNo = '" + PRegNoN + "'";
+    var sqlq = "SELECT * FROM responses WHERE RegNo = '" + obj.RegNo + "'";
     connection.query(sqlq, (err, result) => {
       if (err) {
         console.log(err);
@@ -132,7 +148,13 @@ app.post("/submit", (req, res) => {
       } else {
         if (result[0] != undefined) {
           if (PRegNoN === result[0].RegNo) {
-            res.send(`<script>alert("Registration is Duplicate");</script>`);
+            a = [];
+            msg = {
+              message1: "Registration is Duplicate ",
+              message2: "You are already Registered",
+              message3: "Click on the button below to go to home page ",
+            };
+            res.redirect("/err");
           }
         } else {
           if (data[obj.Slot] > 0) {
@@ -146,19 +168,34 @@ app.post("/submit", (req, res) => {
               "');";
             connection.query(sqlI, (err, result) => {
               data[obj.Slot]--;
+              a = [];
               res.render(__dirname + "/views/submit.ejs", data);
             });
           } else {
-            res.send(
-              `<script>alert("Slots For this time is over try another ");</script>`
-            );
+            a = [];
+            msg = {
+              message1: "Slots For this time are over ",
+              message2: "Try Slot for different timing",
+              message3: "Click on the button below to go to home page ",
+            };
+            res.redirect("/err");
           }
         }
       }
     });
   } else {
+    a = [];
+    msg = {
+      message1: "Registration Not Found For the Event",
+      message2: "Check and fill your details carefully",
+      message3: "Click on the button below to go to home page ",
+    };
+    res.redirect("/err");
     res.send(`<script>alert("Registration Not Found For the Event");</script>`);
   }
+});
+app.get("/err", (req, res) => {
+  res.render(__dirname + "/views/err.ejs", msg);
 });
 
 app.listen(port, () => {

@@ -1,39 +1,29 @@
 body {
     margin: 0;
-   width: 100vh;
-   height: 100vh;
+   overflow-x: hidden;
+  
+   
+   padding: 0;
 }
-
-#stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    z-index: -1;
+html{
+    margin: 0;
+    padding: 0;
 }
+ .star {
+            position: absolute;
+            background: white;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: twinkling linear infinite;
+            z-index: -10;
+        }
+        @keyframes twinkling {
+            0% {opacity: 0;}
+            50% {opacity: 1;}
+            100% {opacity: 0;}
+        }
 
-.star {
-    position: absolute;
-    background-color: white;
-    border-radius: 50%;
-    animation: twinkling linear infinite;
-}
-
-@keyframes twinkling {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
 .card{
     max-height: 15rem;
     min-height: 2rem;
@@ -42,6 +32,8 @@ body {
     border: solid white 3px;
     
 }
+
+
 .w{
     width: 33rem;
 
@@ -54,6 +46,9 @@ body {
     .card{
         width: 15rem;
         min-width : 8rem;
+    }
+    body{
+        overflow:scroll;
     }
 }
 
@@ -89,4 +84,39 @@ body {
     background: -webkit-gradient(linear, left top, left bottom, from(#982727), to(#982727));
     background: -moz-linear-gradient(top, #982727, #982727);
     background: linear-gradient(to bottom, #982727, #982727);
+}
+
+
+
+/* CSS */
+.button-54 {
+  font-family: "Open Sans", sans-serif;
+  width: 8rem;
+  height: 4rem;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #F24645;
+  cursor: pointer;
+  border: 3px solid #4C1817;
+  padding: 0.25em 0.5em;
+ 
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-54:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 768px) {
+  .button-54 {
+    padding: 0.25em 0.75em;
+  }
 }

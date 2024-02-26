@@ -18,8 +18,20 @@
       "
     ></div>
     <% } %> <%- include("logo.ejs") %>
-    <div class="flex justify-center items-center mt-24 text-5xl">
-      THANK YOU FOR YOUR RESPONSE
-    </div>
+    <form action="/err" method="post">
+      <div
+        class="flex mt-20 flex-col justify-center text-5xl items-center text-3xl gap-8"
+      >
+        <div><%= message1 %></div>
+        <div><%= message2 %></div>
+        <div><%= message3 %></div>
+        <button
+          class="button-54 rounded-xl bg-[#F24645] shadow-[#942336]"
+          type="submit"
+        >
+          <div class="text-white">Go Home</div>
+        </button>
+      </div>
+    </form>
   </body>
 </html>

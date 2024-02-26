@@ -4,28 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Instruction</title>
-     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body  class="bg-black text-white">
-    <div>
-      <%- include("./logo.ejs") %>
-      <div>
-        <form action="./slots" method="post">
+  <body class="bg-black text-white">
+    <% for(let i=0; i<170; i++) { %>
+    <div
+      class="star"
+      style="
+        top: <%= Math.random() * 100 %>vh;
+        left: <%= Math.random() * 100 %>vw;
+        animation-duration: <%= Math.random() * 5+1 %>s;
+      "
+    ></div>
+    <% } %>
+    <div class="m-0">
+      <div><%- include("./logo.ejs") %></div>
+      <form action="./slots" method="post" class="mt-16">
         <div>
-          On the next page, you will be asked to pick a slot, there are two days
-          with six slots in each day. Slots are on a first come first serve
-          basis.
+          <div
+            class="text-5xl max-md:text-2xl flex flex-col gap-8 ml-16 max-md:ml-8 text-left px-20"
+          >
+            <div>
+              On the <strong>next page</strong>, you will be asked to
+              <strong>pick a slot</strong>, there are
+              <strong>two days</strong> with four slots in each day. Slots are
+              on a <strong>first come first serve basis.</strong>
+            </div>
+            <div>Make sure <strong>you are free</strong> during that slot.</div>
+            <div>
+              If you are coming with friends who
+              <strong>have registered</strong>, make them pick the
+              <strong>same slot</strong> as you
+            </div>
+            <div class="py-5">
+              <button
+                class="button-54 rounded-xl bg-[#F24645] shadow-[#942336]"
+                type="submit"
+              >
+                <div class="text-white">Next</div>
+              </button>
+            </div>
+          </div>
         </div>
-        <div>Make sure you are free during that slot.</div>
-        <div>
-          If you are coming with friends who have registered, make them pick the
-          same slot as you
-        </div>
-      </div>
-      <div>
-        <button class="btn" type="submit">Next</button>
-      </div>
       </form>
     </div>
   </body>
