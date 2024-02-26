@@ -103,12 +103,17 @@ app.post("/admin/auth/1007", (req, res) => {
 app.post("/admin/1007", (req, res) => {
   let newName = req.body.newname;
   let newReg = req.body.newreg;
-  if (newName != undefined && newReg != undefined) {
+  if (
+    newName == undefined ||
+    newName == "" ||
+    newReg == "" ||
+    newReg == undefined
+  ) {
+    res.redirect("/");
+  } else {
     maindata[newReg] = newName;
     console.log(maindata);
     res.send("sucess");
-  } else {
-    res.redirect("/");
   }
 });
 app.post("/instruction", (req, res) => {
