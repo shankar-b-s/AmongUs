@@ -156,6 +156,8 @@ app.post("/submit", (req, res) => {
   PNameN = PNameN.toUpperCase();
   PRegNoN = PRegNoN.toUpperCase();
   Pslot = Pslot.toLowerCase();
+  PNameN = PNameN.trim();
+  PRegNoN = PRegNoN.trim();
   var obj = {
     Name: PNameN,
     RegNo: PRegNoN,
