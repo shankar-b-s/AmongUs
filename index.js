@@ -417,6 +417,13 @@ app.post("/submit", (req, res) => {
   if (Pslot === undefined || Pslot == "") {
     return res.render(__dirname + "/views/slots.ejs", data);
   }
+  if (PRegNoN == undefined || PRegNoN.trim() === "") {
+    return res.render(__dirname + "/views/reg.ejs");
+  }
+  if (PNameN == undefined || PNameN.trim() === "") {
+    return res.redirect("/name");
+  }
+
   PNameN = PNameN.toUpperCase();
   PRegNoN = PRegNoN.toUpperCase();
   Pslot = Pslot.toLowerCase();
