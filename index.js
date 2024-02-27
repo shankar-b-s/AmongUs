@@ -217,7 +217,6 @@ app.post("/submit", (req, res) => {
       message3: "Click on the button below to go to home page ",
     };
     res.redirect("/err");
-    res.send(`<script>alert("Registration Not Found For the Event");</script>`);
   }
 });
 app.get("/err", (req, res) => {
