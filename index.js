@@ -2,6 +2,7 @@ import express from "express";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
+import session from "express-session";
 import { connection } from "./config.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -10,6 +11,14 @@ const app = express();
 const port = 3000;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: "AmongMeand@ISTE", // Change this to a strong, randomly-generated string
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 var data = {
   s1d1: 40,
@@ -185,6 +194,7 @@ app.post("/submit", (req, res) => {
             connection.query(sqlI, (err, result) => {
               data[obj.Slot]--;
               a = [];
+              req.session.data = data;
               res.render(__dirname + "/views/submit.ejs", data);
             });
           } else {
