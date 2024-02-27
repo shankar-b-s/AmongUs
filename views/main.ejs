@@ -5,6 +5,11 @@
     <title>SlotSelector</title>
     <link rel="stylesheet" href="./styles.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   </head>
   <body class="bg-black text-white">
       <% for(let i=0; i<170; i++) { %>
@@ -12,23 +17,23 @@
     <% } %>
 
 
-    <div id="stars">
+    <div >
       <div>
      <%- include("./logo.ejs") %>
      </div> 
-     <div class=" p-5 flex flex-col items-center  justify-center gap-14 mt-auto">
+     <div class=" p-5 flex flex-col items-center  justify-center gap-14 ">
         <form class="mt-16" action="/reg" method="post" id="slotForm">
           <div class="flex flex-col items-center">
             <div class="display flex flex-col gap-6">
-              <label for="name" class="text-5xl">What is your <strong>Name</strong> </label>
-              <div class="text-2xl">( a.k.a the username your parents gave you )</div>
+              <label for="name" class="text-5xl max-md:text-3xl">What is your <strong>Name</strong> </label>
+              <div class="text-2xl max-md:text-xl">( a.k.a the username your parents gave you )</div>
               <input
                 type="text"
                 name="name"
                 id="name"
                 placeholder="enter your full name"
                 autocomplete="off"
-                class="w border-0 p-1 text-3xl border-b-4 text-[#F24555A1] placeholder:text-[#F24555A1] focus:outline-none bg-black border-[#F24555]"
+                class="border-0 p-1 text-3xl max-md:text-xl border-b-4 text-[#F24555A1] placeholder:text-[#F24555A1] focus:outline-none bg-black border-[#F24555]"
               />
               <button type="submit" class="button-54 rounded-xl  bg-[#F24645] shadow-[#942336]"><div class="text-white">Next</div></button>
             </div>

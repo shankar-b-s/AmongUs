@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   session({
-    secret: "AmongMeand@ISTE", // Change this to a strong, randomly-generated string
+    secret: "AmongMeand@ISTE",
     resave: false,
     saveUninitialized: true,
   })
@@ -57,6 +57,13 @@ let maindata = {
   "22BCE2766": "Sanjana R",
 };
 
+app.get("/", (req, res) => {
+  res.render(__dirname + "/views/welcome.ejs");
+});
+
+app.post("/name", (req, res) => {
+  res.render(__dirname + "/views/main.ejs");
+});
 function CheckData(mydata, regno, name) {
   var flag = 0;
   for (const [key, value] of Object.entries(mydata)) {
@@ -72,7 +79,7 @@ function CheckData(mydata, regno, name) {
   }
 }
 
-app.get("/", (req, res) => {
+app.get("/name", (req, res) => {
   res.render(__dirname + "/views/main.ejs");
 });
 
@@ -93,7 +100,7 @@ app.post("/reg", async (req, res) => {
   var PName = req.body.name;
   console.log(PName);
   if (PName == undefined || PName.trim() === "") {
-    res.redirect("/");
+    res.redirect("/name");
   } else {
     a.push(PName);
     res.render(__dirname + "/views/reg.ejs");

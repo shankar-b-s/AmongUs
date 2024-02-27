@@ -12,18 +12,18 @@
         <div class="star" style="top: <%= Math.random()*100 %>vh; left: <%= Math.random()*100 %>vw; animation-duration: <%= Math.random()*5+1 %>s;"></div>
     <% } %>
     <%- include("./logo.ejs") %>
-    <form action="/instruction" class="flex flex-col justify-center items-center" method="post" id="slotForm">
-      <div class="mt-16">
-        <div class="flex flex-col gap-5">
-          <label for="regno" class="text-5xl">Registration <strong>Number</strong> </label>
-          <div class="text-2xl">( Kinda looks like a game code )</div>
+    <form action="/instruction" class=" px-5 flex flex-col justify-center items-center" method="post" id="slotForm">
+      <div class="mt-16 max-md:mt-24">
+        <div class="flex flex-col gap-5 ">
+          <label for="regno" class="text-5xl max-md:text-4xl">Registration <strong>Number</strong> </label>
+          <div class="text-2xl max-md:text-xl">( Kinda looks like a game code )</div>
           <input
             type="text"
             name="regno"
             id="regno"
             autocomplete="off"
             placeholder="enter your registration number"
-            class="w border-0 p-1 text-3xl border-b-4 text-[#F24555A1] placeholder:text-[#F24555A1] focus:outline-none bg-black border-[#F24555]"
+            class="border-0 p-1 max-md:text-xl text-3xl border-b-4 text-[#F24555A1] placeholder:text-[#F24555A1] focus:outline-none bg-black border-[#F24555]"
             />
             <button class="button-54 rounded-xl  bg-[#F24645] shadow-[#942336]" type="submit"><div class="text-white">Next</div></button>
         </div>
