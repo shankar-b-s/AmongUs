@@ -21,7 +21,7 @@ app.use(
 );
 
 var data = {
-  s1d1: 1,
+  s1d1: 40,
   s2d1: 40,
   s3d1: 40,
   s4d1: 40,
