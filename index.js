@@ -381,46 +381,21 @@ app.post("/reg", async (req, res) => {
   var PName = req.body.name;
   console.log(PName);
   if (PName == undefined || PName.trim() === "") {
-    res.redirect("/name");
+    return res.redirect("/name");
   } else {
     a.push(PName);
-    res.render(__dirname + "/views/reg.ejs");
+    return res.render(__dirname + "/views/reg.ejs");
   }
 });
-app.post("/admin/auth/1007", (req, res) => {
-  let password = req.body.password;
-  let myPass = "AmongMeand@ISTE";
-  console.log(myPass);
-  if (password == myPass) {
-    res.render(__dirname + "/views/admin.ejs");
-  } else {
-    res.redirect("/");
-  }
-});
-app.post("/admin/1007", (req, res) => {
-  let newName = req.body.newname;
-  let newReg = req.body.newreg;
-  if (
-    newName == undefined ||
-    newName == "" ||
-    newReg == "" ||
-    newReg == undefined
-  ) {
-    res.redirect("/");
-  } else {
-    maindata[newReg] = newName;
-    console.log(maindata);
-    res.send("sucess");
-  }
-});
+
 app.post("/instruction", (req, res) => {
   var PRegNo = req.body.regno;
   console.log(PRegNo);
   if (PRegNo == undefined || PRegNo.trim() === "") {
-    res.redirect("/reg");
+    return res.render(__dirname + "/views/reg.ejs");
   } else {
     a.push(PRegNo);
-    res.render(__dirname + "/views/instruction.ejs");
+    return res.render(__dirname + "/views/instruction.ejs");
   }
 });
 app.post("/slots", (req, res) => {
@@ -433,13 +408,14 @@ app.post("/err", (req, res) => {
   res.redirect("/");
 });
 app.post("/submit", (req, res) => {
-  console.log(req.body);
+  console.log(req.body.grp1 + "this is slot");
   console.log("This is a " + a);
   var PNameN = a[a.length - 2];
   var PRegNoN = a[a.length - 1];
   var Pslot = req.body.grp1;
-  if (Pslot == undefined || Pslot == "") {
-    res.redirect("/slots");
+
+  if (Pslot === undefined || Pslot == "") {
+    return res.render(__dirname + "/views/slots.ejs", data);
   }
   PNameN = PNameN.toUpperCase();
   PRegNoN = PRegNoN.toUpperCase();
@@ -513,6 +489,32 @@ app.get("/err", (req, res) => {
   res.render(__dirname + "/views/err.ejs", msg);
 });
 
+app.post("/admin/auth/1007", (req, res) => {
+  let password = req.body.password;
+  let myPass = "AmongMeand@ISTE";
+  console.log(myPass);
+  if (password == myPass) {
+    res.render(__dirname + "/views/admin.ejs");
+  } else {
+    res.redirect("/");
+  }
+});
+app.post("/admin/1007", (req, res) => {
+  let newName = req.body.newname;
+  let newReg = req.body.newreg;
+  if (
+    newName == undefined ||
+    newName == "" ||
+    newReg == "" ||
+    newReg == undefined
+  ) {
+    res.redirect("/");
+  } else {
+    maindata[newReg] = newName;
+    console.log(maindata);
+    res.send("sucess");
+  }
+});
 app.listen(port, () => {
   console.log(`Listening of ${port}.`);
 });
