@@ -36,6 +36,7 @@ html{
     max-width: 21rem;
     width: 20rem;
     border: solid white 3px;
+     box-shadow: 3px 3px 5px rgba(255, 255, 255, 0.4);
     
 }
 
@@ -44,6 +45,8 @@ html{
     width: 33rem;
 
 }
+
+
 .img{
     width: 12rem;
 }
