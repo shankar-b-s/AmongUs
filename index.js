@@ -25,7 +25,7 @@ app.use(
 
 var data = {
   s1d1: 40,
-  s2d1: 14,
+  s2d1: 13,
   s3d1: 26,
   s4d1: 0,
   s1d2: 40,
