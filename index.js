@@ -7,6 +7,9 @@ import { connection } from "./config.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 var a = [];
+var b = [];
+var c = [];
+var i = 0;
 const app = express();
 const port = 3000;
 app.use(express.static("public"));
@@ -394,7 +397,7 @@ app.post("/instruction", (req, res) => {
   if (PRegNo == undefined || PRegNo.trim() === "") {
     return res.render(__dirname + "/views/reg.ejs");
   } else {
-    a.push(PRegNo);
+    b.push(PRegNo);
     return res.render(__dirname + "/views/instruction.ejs");
   }
 });
@@ -410,9 +413,11 @@ app.post("/err", (req, res) => {
 app.post("/submit", (req, res) => {
   console.log(req.body.grp1 + "this is slot");
   console.log("This is a " + a);
-  var PNameN = a[a.length - 2];
-  var PRegNoN = a[a.length - 1];
+  var PNameN = a[i];
+  var PRegNoN = b[i];
   var Pslot = req.body.grp1;
+
+  c.push(Pslot);
 
   if (Pslot === undefined || Pslot == "") {
     return res.render(__dirname + "/views/slots.ejs", data);
@@ -430,9 +435,9 @@ app.post("/submit", (req, res) => {
   PNameN = PNameN.trim();
   PRegNoN = PRegNoN.trim();
   var obj = {
-    Name: PNameN,
-    RegNo: PRegNoN,
-    Slot: Pslot,
+    Name: a[i],
+    RegNo: b[i],
+    Slot: c[i],
   };
 
   console.log(CheckData(maindata, obj.RegNo, obj.Name));
@@ -521,7 +526,9 @@ app.post("/admin/1007", (req, res) => {
     console.log(maindata);
     res.send("sucess");
   }
+  i++;
 });
+
 app.listen(port, () => {
   console.log(`Listening of ${port}.`);
 });
