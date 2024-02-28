@@ -4,7 +4,9 @@ import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
 import session from "express-session";
 import { connection } from "./config.js";
-
+connection.connect(function (err) {
+  console.log("connection failed");
+});
 const __dirname = dirname(fileURLToPath(import.meta.url));
 var name;
 var a = [];
@@ -44,9 +46,9 @@ handleDisconnect();
 var data = {
   s1d1: 40,
   s2d1: 5,
-  s3d1: 25,
+  s3d1: 24,
   s4d1: 0,
-  s1d2: 40,
+  s1d2: 35,
   s2d2: 8,
   s3d2: 31,
   s4d2: 23,
