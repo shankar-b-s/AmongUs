@@ -4,9 +4,6 @@ import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
 import session from "express-session";
 import { connection } from "./config.js";
-connection.connect(function (err) {
-  console.log("connection failed");
-});
 const __dirname = dirname(fileURLToPath(import.meta.url));
 var name;
 var a = [];
@@ -24,24 +21,6 @@ app.use(
     saveUninitialized: true,
   })
 );
-function handleDisconnect() {
-  connection.connect(function (err) {
-    if (err) {
-      console.error("Error connecting to database:", err);
-      setTimeout(handleDisconnect, 2000); // Retry connection after 2 seconds
-    }
-  });
-
-  connection.on("error", function (err) {
-    console.error("Database error:", err);
-    if (err.code === "PROTOCOL_CONNECTION_LOST") {
-      handleDisconnect(); // Reconnect if connection is lost
-    } else {
-      throw err;
-    }
-  });
-}
-handleDisconnect();
 
 var data = {
   s1d1: 40,
