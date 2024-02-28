@@ -25,13 +25,13 @@ app.use(
 
 var data = {
   s1d1: 40,
-  s2d1: 6,
-  s3d1: 26,
+  s2d1: 7,
+  s3d1: 25,
   s4d1: 0,
   s1d2: 40,
   s2d2: 8,
   s3d2: 31,
-  s4d2: 28,
+  s4d2: 25,
 };
 
 var maindata = {
