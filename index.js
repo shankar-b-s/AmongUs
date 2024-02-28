@@ -6,10 +6,10 @@ import session from "express-session";
 import { connection } from "./config.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+var name;
 var a = [];
-var b = [];
-var c = [];
-var i = 0;
+var regno;
+var slot;
 const app = express();
 const port = 3000;
 app.use(express.static("public"));
@@ -22,23 +22,6 @@ app.use(
     saveUninitialized: true,
   })
 );
-
-async function CheckDataAsync(mydata, regno, name) {
-  try {
-    const result = await new Promise((resolve, reject) => {
-      for (const [key, value] of Object.entries(mydata)) {
-        if (key.toUpperCase() === regno && value.toUpperCase() === name) {
-          resolve(true);
-        }
-      }
-      resolve(false);
-    });
-    return result;
-  } catch (error) {
-    console.error("Error checking data:", error);
-    return false;
-  }
-}
 
 var data = {
   s1d1: 40,
@@ -403,18 +386,18 @@ app.post("/reg", async (req, res) => {
   if (PName == undefined || PName.trim() === "") {
     return res.redirect("/name");
   } else {
-    a.push(PName);
+    name = PName;
     return res.render(__dirname + "/views/reg.ejs");
   }
 });
 
 app.post("/instruction", (req, res) => {
   var PRegNo = req.body.regno;
-  console.log(PRegNo);
+
   if (PRegNo == undefined || PRegNo.trim() === "") {
     return res.render(__dirname + "/views/reg.ejs");
   } else {
-    b.push(PRegNo);
+    regno = PRegNo;
     return res.render(__dirname + "/views/instruction.ejs");
   }
 });
@@ -427,107 +410,90 @@ var msg = "";
 app.post("/err", (req, res) => {
   res.redirect("/");
 });
-app.post("/submit", async (req, res) => {
-  try {
-    console.log(req.body.grp1 + "this is slot");
-    console.log("This is a " + a);
-    var PNameN = a[i];
-    var PRegNoN = b[i];
-    var Pslot = req.body.grp1;
+app.post("/submit", (req, res) => {
+  console.log(req.body.grp1 + "this is slot");
 
-    c.push(Pslot);
+  var PNameN = name;
+  var PRegNoN = regno;
+  var Pslot = req.body.grp1;
 
-    if (!Pslot || Pslot.trim() === "" || !PRegNoN || PRegNoN.trim() === "" || !PNameN || PNameN.trim() === "") {
-      return res.render(__dirname + "/views/slots.ejs", data);
-    }
+  // if (Pslot === undefined || Pslot == "") {
+  //   return res.render(__dirname + "/views/slots.ejs", data);
+  // }
+  // if (PRegNoN == undefined || PRegNoN.trim() === "") {
+  //   return res.render(__dirname + "/views/reg.ejs");
+  // }
+  // if (PNameN == undefined || PNameN.trim() === "") {
+  //   return res.redirect("/name");
+  // }
 
-    PNameN = PNameN.toUpperCase();
-    PRegNoN = PRegNoN.toUpperCase();
-    Pslot = Pslot.toLowerCase();
-    PNameN = PNameN.trim();
-    PRegNoN = PRegNoN.trim();
+  PNameN = PNameN.toUpperCase();
+  PRegNoN = PRegNoN.toUpperCase();
+  Pslot = Pslot.toLowerCase();
+  PNameN = PNameN.trim();
+  PRegNoN = PRegNoN.trim();
+  var obj = {
+    Name: PNameN,
+    RegNo: PRegNoN,
+    Slot: Pslot,
+  };
+  console.log(obj);
 
-    var obj = {
-      Name: a[i],
-      RegNo: b[i],
-      Slot: c[i],
-    };
+  console.log(CheckData(maindata, obj.RegNo, obj.Name));
 
-    console.log(await CheckDataAsync(maindata, obj.RegNo, obj.Name));
-
-    if (await CheckDataAsync(maindata, obj.RegNo, obj.Name)) {
-      const sqlq = "SELECT * FROM responses WHERE RegNo = ?";
-      connection.query(sqlq, [obj.RegNo], async (err, result) => {
-        if (err) {
-          console.error(err);
-          console.log("Select command failed.");
-          return res.redirect("/err");
-        }
+  if (CheckData(maindata, obj.RegNo, obj.Name)) {
+    var sqlq = "SELECT * FROM responses WHERE RegNo = '" + obj.RegNo + "'";
+    connection.query(sqlq, (err, result) => {
+      if (err) {
+        console.log(err);
+        console.log("Select command failed.");
+      } else {
         if (result[0] != undefined) {
           if (PRegNoN === result[0].RegNo) {
             a = [];
             msg = {
               message1: "Registration is Duplicate ",
               message2: "You are already Registered",
-              message3: "Click on the button below to go to the home page ",
+              message3: "Click on the button below to go to home page ",
             };
-            return res.redirect("/err");
+            res.redirect("/err");
           }
         } else {
           if (data[obj.Slot] > 0) {
-            const sqlI = "INSERT INTO responses VALUES (?, ?, ?)";
-            connection.query(sqlI, [obj.RegNo, obj.Name, obj.Slot], async (err, result) => {
-              if (err) {
-                console.error(err);
-                console.log("Insert command failed.");
-                return res.redirect("/err");
-              }
-
+            var sqlI =
+              "INSERT INTO responses VALUES ('" +
+              obj.RegNo +
+              "','" +
+              obj.Name +
+              "','" +
+              obj.Slot +
+              "');";
+            connection.query(sqlI, (err, result) => {
               data[obj.Slot]--;
               a = [];
               req.session.data = data;
-              return res.render(__dirname + "/views/submit.ejs", data);
+              res.render(__dirname + "/views/submit.ejs", data);
             });
           } else {
-            if (data[obj.Slot] > 0) {
-              var sqlI =
-                "INSERT INTO responses VALUES ('" +
-                obj.RegNo +
-                "','" +
-                obj.Name +
-                "','" +
-                obj.Slot +
-                "');";
-              connection.query(sqlI, (err, result) => {
-                data[obj.Slot]--;
-                a = [];
-                req.session.data = data;
-                return res.render(__dirname + "/views/submit.ejs", data);
-              });
-            } else {
-              a = [];
-              msg = {
-                message1: "Slots For this time are over ",
-                message2: "Try Slot for a different timing",
-                message3: "Click on the button below to go to the home page ",
-              };
-              return res.redirect("/err");
-            }
+            a = [];
+            msg = {
+              message1: "Slots For this time are over ",
+              message2: "Try Slot for different timing",
+              message3: "Click on the button below to go to home page ",
+            };
+            res.redirect("/err");
           }
         }
-      });
-    } else {
-      a = [];
-      msg = {
-        message1: "Registration Not Found For the Event",
-        message2: "Check and fill your details carefully",
-        message3: "Click on the button below to go to the home page ",
-      };
-      return res.redirect("/err");
-    }
-  } catch (error) {
-    console.error("Error processing submission:", error);
-    return res.redirect("/err");
+      }
+    });
+  } else {
+    a = [];
+    msg = {
+      message1: "Registration Not Found For the Event",
+      message2: "Check and fill your details carefully",
+      message3: "Click on the button below to go to home page ",
+    };
+    res.redirect("/err");
   }
 });
 app.get("/err", (req, res) => {
@@ -547,16 +513,19 @@ app.post("/admin/auth/1007", (req, res) => {
 app.post("/admin/1007", (req, res) => {
   let newName = req.body.newname;
   let newReg = req.body.newreg;
-  if (!newName || newName.trim() === "" || !newReg || newReg.trim() === "") {
-    return res.redirect("/");
+  if (
+    newName == undefined ||
+    newName == "" ||
+    newReg == "" ||
+    newReg == undefined
+  ) {
+    res.redirect("/");
   } else {
     maindata[newReg] = newName;
     console.log(maindata);
-    return res.send("success");
+    res.send("sucess");
   }
-  i++;
 });
-
 app.listen(port, () => {
   console.log(`Listening of ${port}.`);
 });
