@@ -23,6 +23,23 @@ app.use(
   })
 );
 
+async function CheckDataAsync(mydata, regno, name) {
+  try {
+    const result = await new Promise((resolve, reject) => {
+      for (const [key, value] of Object.entries(mydata)) {
+        if (key.toUpperCase() === regno && value.toUpperCase() === name) {
+          resolve(true);
+        }
+      }
+      resolve(false);
+    });
+    return result;
+  } catch (error) {
+    console.error("Error checking data:", error);
+    return false;
+  }
+}
+
 var data = {
   s1d1: 40,
   s2d1: 40,
@@ -410,91 +427,91 @@ var msg = "";
 app.post("/err", (req, res) => {
   res.redirect("/");
 });
-app.post("/submit", (req, res) => {
-  console.log(req.body.grp1 + "this is slot");
-  console.log("This is a " + a);
-  var PNameN = a[i];
-  var PRegNoN = b[i];
-  var Pslot = req.body.grp1;
+app.post("/submit", async (req, res) => {
+  try {
+    console.log(req.body.grp1 + "this is slot");
+    console.log("This is a " + a);
+    var PNameN = a[i];
+    var PRegNoN = b[i];
+    var Pslot = req.body.grp1;
 
-  c.push(Pslot);
+    c.push(Pslot);
 
-  if (Pslot === undefined || Pslot == "") {
-    return res.render(__dirname + "/views/slots.ejs", data);
-  }
-  if (PRegNoN == undefined || PRegNoN.trim() === "") {
-    return res.render(__dirname + "/views/reg.ejs");
-  }
-  if (PNameN == undefined || PNameN.trim() === "") {
-    return res.redirect("/name");
-  }
+    if (!Pslot || Pslot.trim() === "" || !PRegNoN || PRegNoN.trim() === "" || !PNameN || PNameN.trim() === "") {
+      return res.render(__dirname + "/views/slots.ejs", data);
+    }
 
-  PNameN = PNameN.toUpperCase();
-  PRegNoN = PRegNoN.toUpperCase();
-  Pslot = Pslot.toLowerCase();
-  PNameN = PNameN.trim();
-  PRegNoN = PRegNoN.trim();
-  var obj = {
-    Name: a[i],
-    RegNo: b[i],
-    Slot: c[i],
-  };
+    PNameN = PNameN.toUpperCase();
+    PRegNoN = PRegNoN.toUpperCase();
+    Pslot = Pslot.toLowerCase();
+    PNameN = PNameN.trim();
+    PRegNoN = PRegNoN.trim();
 
-  console.log(CheckData(maindata, obj.RegNo, obj.Name));
+    var obj = {
+      Name: a[i],
+      RegNo: b[i],
+      Slot: c[i],
+    };
 
-  if (CheckData(maindata, obj.RegNo, obj.Name)) {
-    var sqlq = "SELECT * FROM responses WHERE RegNo = '" + obj.RegNo + "'";
-    connection.query(sqlq, (err, result) => {
-      if (err) {
-        console.log(err);
-        console.log("Select command failed.");
-      } else {
-        if (result[0] != undefined) {
-          if (PRegNoN === result[0].RegNo) {
-            a = [];
-            msg = {
-              message1: "Registration is Duplicate ",
-              message2: "You are already Registered",
-              message3: "Click on the button below to go to home page ",
-            };
-            res.redirect("/err");
-          }
+    console.log(await CheckDataAsync(maindata, obj.RegNo, obj.Name));
+
+    if (await CheckDataAsync(maindata, obj.RegNo, obj.Name)) {
+      var sqlq = "SELECT * FROM responses WHERE RegNo = '" + obj.RegNo + "'";
+      connection.query(sqlq, async (err, result) => {
+        if (err) {
+          console.error(err);
+          console.log("Select command failed.");
         } else {
-          if (data[obj.Slot] > 0) {
-            var sqlI =
-              "INSERT INTO responses VALUES ('" +
-              obj.RegNo +
-              "','" +
-              obj.Name +
-              "','" +
-              obj.Slot +
-              "');";
-            connection.query(sqlI, (err, result) => {
-              data[obj.Slot]--;
+          if (result[0] != undefined) {
+            if (PRegNoN === result[0].RegNo) {
               a = [];
-              req.session.data = data;
-              res.render(__dirname + "/views/submit.ejs", data);
-            });
+              msg = {
+                message1: "Registration is Duplicate ",
+                message2: "You are already Registered",
+                message3: "Click on the button below to go to the home page ",
+              };
+              return res.redirect("/err");
+            }
           } else {
-            a = [];
-            msg = {
-              message1: "Slots For this time are over ",
-              message2: "Try Slot for different timing",
-              message3: "Click on the button below to go to home page ",
-            };
-            res.redirect("/err");
+            if (data[obj.Slot] > 0) {
+              var sqlI =
+                "INSERT INTO responses VALUES ('" +
+                obj.RegNo +
+                "','" +
+                obj.Name +
+                "','" +
+                obj.Slot +
+                "');";
+              connection.query(sqlI, (err, result) => {
+                data[obj.Slot]--;
+                a = [];
+                req.session.data = data;
+                return res.render(__dirname + "/views/submit.ejs", data);
+              });
+            } else {
+              a = [];
+              msg = {
+                message1: "Slots For this time are over ",
+                message2: "Try Slot for a different timing",
+                message3: "Click on the button below to go to the home page ",
+              };
+              return res.redirect("/err");
+            }
           }
         }
-      }
-    });
-  } else {
-    a = [];
-    msg = {
-      message1: "Registration Not Found For the Event",
-      message2: "Check and fill your details carefully",
-      message3: "Click on the button below to go to home page ",
-    };
-    res.redirect("/err");
+      });
+    } else {
+      a = [];
+      msg = {
+        message1: "Registration Not Found For the Event",
+        message2: "Check and fill your details carefully",
+        message3: "Click on the button below to go to the home page ",
+      };
+      return res.redirect("/err");
+    }
+  } catch (error) {
+    console.error("Error processing submission:", error);
+    return res.redirect("/err");
   }
 });
 app.get("/err", (req, res) => {
@@ -514,17 +531,12 @@ app.post("/admin/auth/1007", (req, res) => {
 app.post("/admin/1007", (req, res) => {
   let newName = req.body.newname;
   let newReg = req.body.newreg;
-  if (
-    newName == undefined ||
-    newName == "" ||
-    newReg == "" ||
-    newReg == undefined
-  ) {
-    res.redirect("/");
+  if (!newName || newName.trim() === "" || !newReg || newReg.trim() === "") {
+    return res.redirect("/");
   } else {
     maindata[newReg] = newName;
     console.log(maindata);
-    res.send("sucess");
+    return res.send("success");
   }
   i++;
 });
