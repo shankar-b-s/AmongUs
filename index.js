@@ -25,11 +25,11 @@ app.use(
 
 var data = {
   s1d1: 40,
-  s2d1: 40,
+  s2d1: 29,
   s3d1: 40,
-  s4d1: 40,
+  s4d1: 38,
   s1d2: 40,
-  s2d2: 40,
+  s2d2: 28,
   s3d2: 40,
   s4d2: 40,
 };
@@ -81,7 +81,7 @@ var maindata = {
   "22BCE0593": "NIKHIL B S",
   "22BCE0617": "YASH BAJPAI",
   "22BCE0813": "PRAGYA",
-  "22BCE0825": "MARMIK SANDIPBHAI JETHWA",
+  "22BCE0825": "Marmik Sandiphhai Jethwa",
   "22BCE2115": "GUNUPATI PAVAN KUMAR REDDY",
   "22BCE2171": "YASHASVI AGARWAL",
   "22BCE2231": "VARRSAN D",
@@ -363,17 +363,10 @@ function CheckData(mydata, regno, name) {
   }
 }
 
-app.get("/name", (req, res) => {
-  res.render(__dirname + "/views/main.ejs");
-});
-
 app.get("/admin/auth/1007", (req, res) => {
   res.render(__dirname + "/views/adminAuth.ejs");
 });
 
-app.get("/slots", (req, res) => {
-  res.render(__dirname + "/views/slots.ejs");
-});
 var msg = "";
 
 app.post("/err", (req, res) => {
