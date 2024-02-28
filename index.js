@@ -22,16 +22,34 @@ app.use(
     saveUninitialized: true,
   })
 );
+function handleDisconnect() {
+  connection.connect(function (err) {
+    if (err) {
+      console.error("Error connecting to database:", err);
+      setTimeout(handleDisconnect, 2000); // Retry connection after 2 seconds
+    }
+  });
+
+  connection.on("error", function (err) {
+    console.error("Database error:", err);
+    if (err.code === "PROTOCOL_CONNECTION_LOST") {
+      handleDisconnect(); // Reconnect if connection is lost
+    } else {
+      throw err;
+    }
+  });
+}
+handleDisconnect();
 
 var data = {
   s1d1: 40,
-  s2d1: 7,
+  s2d1: 5,
   s3d1: 25,
   s4d1: 0,
   s1d2: 40,
   s2d2: 8,
   s3d2: 31,
-  s4d2: 25,
+  s4d2: 23,
 };
 
 var maindata = {
