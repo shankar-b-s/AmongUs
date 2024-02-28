@@ -25,13 +25,13 @@ app.use(
 
 var data = {
   s1d1: 40,
-  s2d1: 11,
+  s2d1: 10,
   s3d1: 26,
   s4d1: 0,
   s1d2: 40,
   s2d2: 9,
   s3d2: 40,
-  s4d2: 29,
+  s4d2: 28,
 };
 
 var maindata = {
@@ -492,18 +492,6 @@ app.post("/admin/1007", (req, res) => {
 app.post("/slots", (req, res) => {
   res.render(__dirname + "/views/slots.ejs", data);
 });
-
-// Add this code to refresh every 2 minutes (120000 milliseconds)
-const refreshInterval = 120000;
-
-setInterval(() => {
-  // This function will be executed every 2 minutes
-  console.log('Refreshing site...');
-  // You can put any logic here that you want to execute on every refresh
-
-  // In your case, you might want to update the data or perform other operations
-
-}, refreshInterval);
 
 app.listen(port, () => {
   console.log(`Listening of ${port}.`);
