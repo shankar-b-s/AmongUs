@@ -3,7 +3,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
 import session from "express-session";
-import { connection } from "./config.js";
+import { pool } from "./config.js";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 var name;
 var a = [];
@@ -46,7 +46,7 @@ var data = {
   s4d1: 0,
   s1d2: 35,
   s2d2: 8,
-  s3d2: 27,
+  s3d2: 23,
   s4d2: 23,
 };
 
