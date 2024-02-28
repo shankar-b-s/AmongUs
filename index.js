@@ -456,22 +456,38 @@ app.post("/submit", async (req, res) => {
     console.log(await CheckDataAsync(maindata, obj.RegNo, obj.Name));
 
     if (await CheckDataAsync(maindata, obj.RegNo, obj.Name)) {
-      var sqlq = "SELECT * FROM responses WHERE RegNo = '" + obj.RegNo + "'";
-      connection.query(sqlq, async (err, result) => {
+      const sqlq = "SELECT * FROM responses WHERE RegNo = ?";
+      connection.query(sqlq, [obj.RegNo], async (err, result) => {
         if (err) {
           console.error(err);
           console.log("Select command failed.");
+          return res.redirect("/err");
+        }
+        if (result[0] != undefined) {
+          if (PRegNoN === result[0].RegNo) {
+            a = [];
+            msg = {
+              message1: "Registration is Duplicate ",
+              message2: "You are already Registered",
+              message3: "Click on the button below to go to the home page ",
+            };
+            return res.redirect("/err");
+          }
         } else {
-          if (result[0] != undefined) {
-            if (PRegNoN === result[0].RegNo) {
+          if (data[obj.Slot] > 0) {
+            const sqlI = "INSERT INTO responses VALUES (?, ?, ?)";
+            connection.query(sqlI, [obj.RegNo, obj.Name, obj.Slot], async (err, result) => {
+              if (err) {
+                console.error(err);
+                console.log("Insert command failed.");
+                return res.redirect("/err");
+              }
+
+              data[obj.Slot]--;
               a = [];
-              msg = {
-                message1: "Registration is Duplicate ",
-                message2: "You are already Registered",
-                message3: "Click on the button below to go to the home page ",
-              };
-              return res.redirect("/err");
-            }
+              req.session.data = data;
+              return res.render(__dirname + "/views/submit.ejs", data);
+            });
           } else {
             if (data[obj.Slot] > 0) {
               var sqlI =
