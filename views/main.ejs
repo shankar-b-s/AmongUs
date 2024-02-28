@@ -9,9 +9,7 @@
     <link rel="icon" href="./favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  </head>
+ </head>
   <body class="bg-black text-white">
       <% for(let i=0; i<170; i++) { %>
         <div class="star" style="top: <%= Math.random()*100 %>vh; left: <%= Math.random()*100 %>vw; animation-duration: <%= Math.random()*5+1 %>s;"></div>
@@ -23,7 +21,7 @@
      <%- include("./logo.ejs") %>
      <div class="max-md:px-8">
      <form class="px-5 flex flex-col justify-center items-center" action="/reg" method="post" id="slotForm">
-     <div class="mt-16 max-md:mt-24 ">
+     <div class="mt-16 max-md:mt-24 max-md:ml-8">
           
             <div class=" flex flex-col p-5 gap-5">
               <label for="name" class="text-5xl max-md:text-4xl">What is your <strong>Name</strong> </label>
