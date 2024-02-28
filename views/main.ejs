@@ -19,12 +19,12 @@
 
 
     <div >
-      <div>
+      
      <%- include("./logo.ejs") %>
-     </div> 
-     <div class="max-md:ml-4  flex p-8 flex-col items-center  justify-center gap-14 ">
-        <form class="mt-16 max-md:mt-24" action="/reg" method="post" id="slotForm">
-          <div class="flex flex-col items-center">
+     
+     <form class="px-5 flex flex-col justify-center items-center" action="/reg" method="post" id="slotForm">
+     <div class="mt-16 max-md:mt-24 ">
+          
             <div class="display flex flex-col gap-6">
               <label for="name" class="text-5xl max-md:text-3xl">What is your <strong>Name</strong> </label>
               <div class="text-2xl max-md:text-xl">( a.k.a the username your parents gave you )</div>
@@ -39,13 +39,13 @@
               <button type="submit" class="button-54 rounded-xl  bg-[#F24645] shadow-[#942336]"><div class="text-white">Next</div></button>
             </div>
             
-          </div>
+         
          
           </div>
           
-        </form>
-       
-      </div>
+          
+        </div>
+      </form>
     </div>
     <script>
   
