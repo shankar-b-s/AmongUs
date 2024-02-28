@@ -36,7 +36,7 @@ var data = {
 
 var maindata = {
   "22BCE0375": "Khushi Sikaria",
-  "22BCE0409": "Tanisha Pawha",
+  "22BCE0409": "Tanisha Pahwa",
   "22BCE0791": "Harsh Kumar Sinha",
   "20BEC0481": "UTKARSH AMAR",
   "21BBT0005": "RUCHITA MAURYA",
@@ -368,43 +368,12 @@ app.get("/name", (req, res) => {
 });
 
 app.get("/admin/auth/1007", (req, res) => {
-  res.render(res.render(__dirname + "/views/adminAuth.ejs"));
+  res.render(__dirname + "/views/adminAuth.ejs");
 });
-app.get("/reg", (req, res) => {
-  res.render(res.render(__dirname + "/views/reg.ejs"));
-});
+
 app.get("/slots", (req, res) => {
-  res.render(res.render(__dirname + "/views/slots.ejs"));
+  res.render(__dirname + "/views/slots.ejs");
 });
-app.get("/instuctions", (req, res) => {
-  res.render(__dirname + "/views/instruction.ejs");
-});
-
-app.post("/reg", async (req, res) => {
-  var PName = req.body.name;
-  console.log(PName);
-  if (PName == undefined || PName.trim() === "") {
-    return res.redirect("/name");
-  } else {
-    name = PName;
-    return res.render(__dirname + "/views/reg.ejs");
-  }
-});
-
-app.post("/instruction", (req, res) => {
-  var PRegNo = req.body.regno;
-
-  if (PRegNo == undefined || PRegNo.trim() === "") {
-    return res.render(__dirname + "/views/reg.ejs");
-  } else {
-    regno = PRegNo;
-    return res.render(__dirname + "/views/instruction.ejs");
-  }
-});
-app.post("/slots", (req, res) => {
-  res.render(__dirname + "/views/slots.ejs", data);
-});
-
 var msg = "";
 
 app.post("/err", (req, res) => {
@@ -413,19 +382,20 @@ app.post("/err", (req, res) => {
 app.post("/submit", (req, res) => {
   console.log(req.body.grp1 + "this is slot");
 
-  var PNameN = name;
-  var PRegNoN = regno;
+  var PNameN = req.body.name;
+  var PRegNoN = req.body.regno;
   var Pslot = req.body.grp1;
 
-  // if (Pslot === undefined || Pslot == "") {
-  //   return res.render(__dirname + "/views/slots.ejs", data);
-  // }
-  // if (PRegNoN == undefined || PRegNoN.trim() === "") {
-  //   return res.render(__dirname + "/views/reg.ejs");
-  // }
-  // if (PNameN == undefined || PNameN.trim() === "") {
-  //   return res.redirect("/name");
-  // }
+  if (
+    Pslot === undefined ||
+    Pslot == "" ||
+    PRegNoN == undefined ||
+    PRegNoN.trim() === "" ||
+    PNameN == undefined ||
+    PNameN.trim() === ""
+  ) {
+    return res.render(__dirname + "/views/slots.ejs", data);
+  }
 
   PNameN = PNameN.toUpperCase();
   PRegNoN = PRegNoN.toUpperCase();
@@ -487,7 +457,6 @@ app.post("/submit", (req, res) => {
       }
     });
   } else {
-    a = [];
     msg = {
       message1: "Registration Not Found For the Event",
       message2: "Check and fill your details carefully",
@@ -525,6 +494,10 @@ app.post("/admin/1007", (req, res) => {
     console.log(maindata);
     res.send("sucess");
   }
+});
+
+app.post("/slots", (req, res) => {
+  res.render(__dirname + "/views/slots.ejs", data);
 });
 app.listen(port, () => {
   console.log(`Listening of ${port}.`);
