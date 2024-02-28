@@ -17,16 +17,16 @@
         <div class="star" style="top: <%= Math.random()*100 %>vh; left: <%= Math.random()*100 %>vw; animation-duration: <%= Math.random()*5+1 %>s;"></div>
     <% } %>
 
-
+      
     <div >
       
      <%- include("./logo.ejs") %>
-     
+     <div class="max-md:px-8">
      <form class="px-5 flex flex-col justify-center items-center" action="/reg" method="post" id="slotForm">
      <div class="mt-16 max-md:mt-24 ">
           
-            <div class="display flex flex-col gap-6">
-              <label for="name" class="text-5xl max-md:text-3xl">What is your <strong>Name</strong> </label>
+            <div class=" flex flex-col p-5 gap-5">
+              <label for="name" class="text-5xl max-md:text-4xl">What is your <strong>Name</strong> </label>
               <div class="text-2xl max-md:text-xl">( a.k.a the username your parents gave you )</div>
               <input
                 type="text"
@@ -46,6 +46,7 @@
           
         </div>
       </form>
+      </div>
     </div>
     <script>
   
