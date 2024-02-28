@@ -126,4 +126,10 @@ html{
   .button-54 {
     padding: 0.25em 0.75em;
   }
+  
+  .max-md\:px-8 {
+    padding-right: 2rem; /* Adjust as per your requirement */
+    padding-left: 2rem; /* Adjust as per your requirement */
+  
+}
 }
