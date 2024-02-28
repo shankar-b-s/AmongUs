@@ -41,13 +41,13 @@ app.use(
 
 var data = {
   s1d1: 40,
-  s2d1: 0,
-  s3d1: 24,
+  s2d1: 2,
+  s3d1: 21,
   s4d1: 0,
-  s1d2: 35,
-  s2d2: 8,
-  s3d2: 23,
-  s4d2: 23,
+  s1d2: 33,
+  s2d2: 6,
+  s3d2: 27,
+  s4d2: 24,
 };
 
 var maindata = {
