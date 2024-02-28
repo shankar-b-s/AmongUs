@@ -421,8 +421,8 @@ app.post("/submit", (req, res) => {
   console.log(CheckData(maindata, obj.RegNo, obj.Name));
 
   if (CheckData(maindata, obj.RegNo, obj.Name)) {
-    var sqlq = "SELECT * FROM responses WHERE RegNo = '" + obj.RegNo + "'";
-    connection.query(sqlq, (err, result) => {
+    var sqlq = "SELECT * FROM responses WHERE RegNo = ?";
+    pool.query(sqlq, [obj.RegNo], (err, result) => {
       if (err) {
         console.log(err);
         console.log("Select command failed.");
@@ -439,15 +439,8 @@ app.post("/submit", (req, res) => {
           }
         } else {
           if (data[obj.Slot] > 0) {
-            var sqlI =
-              "INSERT INTO responses VALUES ('" +
-              obj.RegNo +
-              "','" +
-              obj.Name +
-              "','" +
-              obj.Slot +
-              "');";
-            connection.query(sqlI, (err, result) => {
+            var sqlI = "INSERT INTO responses VALUES (?, ?, ?)";
+            pool.query(sqlI, [obj.RegNo, obj.Name, obj.Slot], (err, result) => {
               data[obj.Slot]--;
               a = [];
               req.session.data = data;
