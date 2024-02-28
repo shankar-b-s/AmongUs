@@ -25,13 +25,13 @@ app.use(
 
 var data = {
   s1d1: 40,
-  s2d1: 29,
-  s3d1: 40,
-  s4d1: 38,
+  s2d1: 14,
+  s3d1: 26,
+  s4d1: 0,
   s1d2: 40,
-  s2d2: 28,
+  s2d2: 10,
   s3d2: 40,
-  s4d2: 40,
+  s4d2: 29,
 };
 
 var maindata = {
@@ -279,7 +279,7 @@ var maindata = {
   "23BEC0126": "DIVYASHREE AYYAGARI",
   "23BEC0173": "ANAGHA S",
   "23BEC0187": "ABISHEK GURU M",
-  "23BEC0343": "GANGISHETTY TEJASHWAN ",
+  "23BEC0343": "GANGISHETTY TEJASHWAN",
   "23BEC0345": "DEVI ABHIRAMI S",
   "23BEC0385": "JEROM JASON ASHOK",
   "23BEE0004": "HRISHITA DAS GUPTA",
