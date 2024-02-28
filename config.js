@@ -1,6 +1,7 @@
 import mysql from "mysql";
 import { env } from "process";
-export var connection = mysql.createConnection({
+export const pool = mysql.createPool({
+  connectionLimit: 10, // Adjust as per your requirements
   host: env.DB_HOST || "localhost",
   user: env.DB_USER || "root",
   password: env.DB_PASSWORD || "123456789",

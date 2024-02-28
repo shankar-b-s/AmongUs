@@ -14,6 +14,23 @@ const port = 3000;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+pool.on("error", function (err) {
+  console.log("Database error:", err);
+  if (err.code === "PROTOCOL_CONNECTION_LOST") {
+    console.log("Reconnecting to the database...");
+    pool.getConnection(function (err, connection) {
+      if (err) {
+        console.error("Error while reconnecting:", err);
+      } else {
+        console.log("Reconnected!");
+        connection.release();
+      }
+    });
+  } else {
+    throw err;
+  }
+});
+
 app.use(
   session({
     secret: "AmongMeand@ISTE",
@@ -24,12 +41,12 @@ app.use(
 
 var data = {
   s1d1: 40,
-  s2d1: 5,
+  s2d1: 0,
   s3d1: 24,
   s4d1: 0,
   s1d2: 35,
   s2d2: 8,
-  s3d2: 31,
+  s3d2: 27,
   s4d2: 23,
 };
 
