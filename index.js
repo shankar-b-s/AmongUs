@@ -40,14 +40,14 @@ app.use(
 );
 
 var data = {
-  s1d1: 34,
+  s1d1: 29,
   s2d1: 2,
-  s3d1: 9,
+  s3d1: 0,
   s4d1: 0,
-  s1d2: 31,
-  s2d2: 3,
-  s3d2: 25,
-  s4d2: 10,
+  s1d2: 28,
+  s2d2: 1,
+  s3d2: 18,
+  s4d2: 3,
 };
 
 var maindata = {
@@ -332,7 +332,7 @@ var maindata = {
   "23BME0323": "TANISH DUA",
   "23BME0341": "ARNAV AGARWAL",
   "23BME0351": "RITWIK JOSHI",
-  "23BME0355": " GOVEKAR YASH PRAMOD",
+  "23BME0355": "GOVEKAR YASH PRAMOD",
   "23BME0363": "JASJEET SINGH",
   "23BME0490": "DARVEKAR ARNAV AMOL",
   "23BML0012": "SHUBHANGI SHANDILYA",
@@ -345,7 +345,7 @@ var maindata = {
   "23MID0115": "SYED SAIF SAMI",
   "23MID0123": "HIRTHIK ELANGOVAN",
   "23MID0126": "CATTAMANCHI VIDEESHA",
-  "23MID0150": "RIYA  SUSAN SAMUEL",
+  "23MID0150": "RIYA SUSAN SAMUEL",
   "23MID0197": "SRI SAHANA S",
   "23MID0340": "MUPPIRI TRINAY",
   "23MID0344": "AVINASH A",
