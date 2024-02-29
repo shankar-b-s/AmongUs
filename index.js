@@ -40,14 +40,14 @@ app.use(
 );
 
 var data = {
-  s1d1: 29,
-  s2d1: 2,
+  s1d1: 28,
+  s2d1: 0,
   s3d1: 0,
   s4d1: 0,
-  s1d2: 28,
-  s2d2: 1,
-  s3d2: 18,
-  s4d2: 3,
+  s1d2: 27,
+  s2d2: 0,
+  s3d2: 7,
+  s4d2: 1,
 };
 
 var maindata = {
